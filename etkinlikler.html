@@ -11,12 +11,51 @@
 <a href="etkinlikler.html" aria-current="page">Etkinlikler</a>
 <a href="hakkimizda.html">Hakkımızda</a></nav></header>
 <main><p class="eyebrow">KAMPÜS KULÜBÜ</p><h1>Etkinlik takvimi</h1>
-<p class="intro">İlk projen için üç buluşma. Aşağıdaki kayıtlar eğitim amacıyla hazırlanmış örnek verilerdir.</p>
+<p class="intro">İlk projen için dört buluşma. Aşağıdaki kayıtlar eğitim amacıyla hazırlanmış örnek verilerdir.</p>
+<form class="event-filters" id="event-filters">
+<label for="event-search">Etkinlik ara</label>
+<div class="filter-row"><input id="event-search" type="search" placeholder="Harfleri yaz..." autocomplete="off"><button type="submit">Ara</button></div>
+<label for="event-date">Tarihe göre filtrele</label>
+<select id="event-date"><option value="all">Tüm tarihler</option><option value="12-kasim">12 Kasım</option><option value="19-kasim">19 Kasım</option><option value="26-kasim">26 Kasım</option><option value="03-aralik">3 Aralık</option></select>
+</form>
+<p class="filter-status" id="filter-status" aria-live="polite">4 etkinlik gösteriliyor.</p>
 <section class="grid" aria-label="Örnek etkinlikler">
-<article><p class="meta">12 KASIM / 14.00</p><h2>HTML Atölyesi</h2><p>Başlık, paragraf ve linklerle ilk sayfanı oluştur.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
-<article><p class="meta">19 KASIM / 14.00</p><h2>CSS Tasarım Saati</h2><p>Renkleri, boşlukları ve sayfa düzenini keşfet.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
-<article><p class="meta">26 KASIM / 14.00</p><h2>Copilot ile Kod Okuma</h2><p>Kodunu açıklat, küçük bir değişiklik yap ve sonucu dene.</p><p>Yer: Çevrim içi buluşma</p></article>
+<article data-date="12-kasim"><p class="meta">12 KASIM / 14.00</p><h2>HTML Atölyesi</h2><p>Başlık, paragraf ve linklerle ilk sayfanı oluştur.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="19-kasim"><p class="meta">19 KASIM / 14.00</p><h2>CSS Tasarım Saati</h2><p>Renkleri, boşlukları ve sayfa düzenini keşfet.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="26-kasim"><p class="meta">26 KASIM / 14.00</p><h2>Copilot ile Kod Okuma</h2><p>Kodunu açıklat, küçük bir değişiklik yap ve sonucu dene.</p><p>Yer: Çevrim içi buluşma</p></article>
+<article data-date="03-aralik"><p class="meta">03 ARALIK / 14.00</p><h2>GitHub Atölyesi</h2><p>Projeni GitHub üzerinde paylaşmayı ve sürüm takibini öğren.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
 </section><p class="note">Bu sayfa statiktir. Etkinlik eklemek için HTML dosyasını düzenleriz.</p></main>
 <footer>BPR201 - İnternet Tabanlı Programlama / Eğitim amaçlı örnek proje</footer>
+<script>
+const filterForm = document.querySelector('#event-filters');
+const searchInput = document.querySelector('#event-search');
+const dateSelect = document.querySelector('#event-date');
+const filterStatus = document.querySelector('#filter-status');
+const eventCards = document.querySelectorAll('.grid article');
+
+const normalizeText = (text) => text.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+const filterEvents = () => {
+  const searchText = normalizeText(searchInput.value.trim());
+  const selectedDate = dateSelect.value;
+  let visibleCount = 0;
+
+  eventCards.forEach((card) => {
+    const matchesText = normalizeText(card.textContent).includes(searchText);
+    const matchesDate = selectedDate === 'all' || card.dataset.date === selectedDate;
+    const isVisible = matchesText && matchesDate;
+    card.hidden = !isVisible;
+    if (isVisible) visibleCount += 1;
+  });
+
+  filterStatus.textContent = visibleCount === 0 ? 'Aramanızla eşleşen etkinlik bulunamadı.' : `${visibleCount} etkinlik gösteriliyor.`;
+};
+
+filterForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  filterEvents();
+});
+dateSelect.addEventListener('change', filterEvents);
+</script>
 </body>
 </html>
