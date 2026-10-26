@@ -11,29 +11,36 @@
 <a href="etkinlikler.html" aria-current="page">Etkinlikler</a>
 <a href="hakkimizda.html">Hakkımızda</a></nav></header>
 <main><p class="eyebrow">KAMPÜS KULÜBÜ</p><h1>Etkinlik takvimi</h1>
-<p class="intro">İlk projen için dört buluşma. Aşağıdaki kayıtlar eğitim amacıyla hazırlanmış örnek verilerdir.</p>
+<p class="intro">İlk projen için on buluşma. Aşağıdaki kayıtlar eğitim amacıyla hazırlanmış örnek verilerdir.</p>
 <form class="event-filters" id="event-filters">
 <label for="event-search">Etkinlik ara</label>
-<div class="filter-row"><input id="event-search" type="search" placeholder="Harfleri yaz..." autocomplete="off"><button type="submit">Ara</button></div>
+<div class="filter-row"><input id="event-search" type="search" placeholder="Harfleri veya boşlukları yaz..." autocomplete="off"><button type="submit">Ara</button><button type="button" id="clear-filters" class="button-secondary">Temizle</button></div>
 <label for="event-date">Tarihe göre filtrele</label>
-<select id="event-date"><option value="all">Tüm tarihler</option><option value="12-kasim">12 Kasım</option><option value="19-kasim">19 Kasım</option><option value="26-kasim">26 Kasım</option><option value="03-aralik">3 Aralık</option></select>
+<select id="event-date"><option value="all">Tüm tarihler</option><option value="12-kasim">12 Kasım</option><option value="19-kasim">19 Kasım</option><option value="26-kasim">26 Kasım</option><option value="03-aralik">3 Aralık</option><option value="10-aralik">10 Aralık</option><option value="17-aralik">17 Aralık</option><option value="24-aralik">24 Aralık</option><option value="07-ocak">7 Ocak</option><option value="14-ocak">14 Ocak</option><option value="21-ocak">21 Ocak</option></select>
 </form>
-<p class="filter-status" id="filter-status" aria-live="polite">4 etkinlik gösteriliyor.</p>
+<p class="filter-status" id="filter-status" aria-live="polite">10 etkinlik gösteriliyor.</p>
 <section class="grid" aria-label="Örnek etkinlikler">
 <article data-date="12-kasim"><p class="meta">12 KASIM / 14.00</p><h2>HTML Atölyesi</h2><p>Başlık, paragraf ve linklerle ilk sayfanı oluştur.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
 <article data-date="19-kasim"><p class="meta">19 KASIM / 14.00</p><h2>CSS Tasarım Saati</h2><p>Renkleri, boşlukları ve sayfa düzenini keşfet.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
 <article data-date="26-kasim"><p class="meta">26 KASIM / 14.00</p><h2>Copilot ile Kod Okuma</h2><p>Kodunu açıklat, küçük bir değişiklik yap ve sonucu dene.</p><p>Yer: Çevrim içi buluşma</p></article>
 <article data-date="03-aralik"><p class="meta">03 ARALIK / 14.00</p><h2>GitHub Atölyesi</h2><p>Projeni GitHub üzerinde paylaşmayı ve sürüm takibini öğren.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="10-aralik"><p class="meta">10 ARALIK / 14.00</p><h2>Git ile Sürüm Kontrolü</h2><p>Değişikliklerini kaydetmeyi ve proje geçmişini takip etmeyi öğren.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="17-aralik"><p class="meta">17 ARALIK / 14.00</p><h2>JavaScript Başlangıç Atölyesi</h2><p>Değişkenleri ve olayları kullanarak sayfana hareket kazandır.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="24-aralik"><p class="meta">24 ARALIK / 14.00</p><h2>Erişilebilir Web Tasarımı</h2><p>Herkesin kullanabileceği anlaşılır ve erişilebilir sayfalar tasarla.</p><p>Yer: Tasarım Stüdyosu</p></article>
+<article data-date="07-ocak"><p class="meta">07 OCAK / 14.00</p><h2>Duyarlı Tasarım Atölyesi</h2><p>Sayfanı telefon, tablet ve bilgisayar ekranlarına uyumlu hale getir.</p><p>Yer: Bilgisayar Laboratuvarı</p></article>
+<article data-date="14-ocak"><p class="meta">14 OCAK / 14.00</p><h2>API'lerle Tanışma</h2><p>Web sayfalarının dış servislerden nasıl veri aldığını keşfet.</p><p>Yer: Çevrim içi buluşma</p></article>
+<article data-date="21-ocak"><p class="meta">21 OCAK / 14.00</p><h2>Proje Sunum Günü</h2><p>Geliştirdiğin projeyi paylaş ve arkadaşlarından geri bildirim al.</p><p>Yer: Çok Amaçlı Salon</p></article>
 </section><p class="note">Bu sayfa statiktir. Etkinlik eklemek için HTML dosyasını düzenleriz.</p></main>
 <footer>BPR201 - İnternet Tabanlı Programlama / Eğitim amaçlı örnek proje</footer>
 <script>
 const filterForm = document.querySelector('#event-filters');
 const searchInput = document.querySelector('#event-search');
 const dateSelect = document.querySelector('#event-date');
+const clearButton = document.querySelector('#clear-filters');
 const filterStatus = document.querySelector('#filter-status');
 const eventCards = document.querySelectorAll('.grid article');
 
-const normalizeText = (text) => text.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const normalizeText = (text) => text.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ı/g, 'i').replace(/\s+/g, ' ').trim();
 
 const filterEvents = () => {
   const searchText = normalizeText(searchInput.value.trim());
@@ -55,7 +62,13 @@ filterForm.addEventListener('submit', (event) => {
   event.preventDefault();
   filterEvents();
 });
+searchInput.addEventListener('input', filterEvents);
 dateSelect.addEventListener('change', filterEvents);
+clearButton.addEventListener('click', () => {
+  filterForm.reset();
+  filterEvents();
+  searchInput.focus();
+});
 </script>
 </body>
 </html>

@@ -14,9 +14,11 @@ h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.12; max-width: 850px; mar
 .intro { font-size: 21px; max-width: 730px; color: #496272; }
 .event-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(190px, 0.45fr); gap: 8px 18px; max-width: 760px; margin: 30px 0 10px; }
 .event-filters label { font-weight: bold; color: #183044; }
-.filter-row { display: flex; gap: 8px; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-row input { flex: 1 1 auto; width: auto; min-width: 0; }
 .event-filters input, .event-filters select { width: 100%; min-height: 44px; border: 1px solid #aebfc9; border-radius: 6px; padding: 9px 12px; color: #183044; background: white; font: inherit; }
 .event-filters button { border: 0; border-radius: 6px; padding: 9px 20px; background: #087d70; color: white; font: inherit; font-weight: bold; cursor: pointer; }
+.event-filters .button-secondary { background: #496272; }
 .event-filters input:focus-visible, .event-filters select:focus-visible, .event-filters button:focus-visible { outline: 3px solid #e1a82b; outline-offset: 3px; }
 .filter-status { color: #496272; margin: 8px 0 0; }
 .button { display: inline-block; margin: 16px 0 32px; padding: 13px 24px; background: #087d70; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; }
@@ -26,4 +28,4 @@ article h2 { margin: 10px 0; font-size: 23px; }
 .meta { font-size: 14px; color: #087d70; font-weight: bold; }
 .note { padding: 18px 22px; border-left: 4px solid #db9d27; background: #fff4d8; margin-top: 30px; }
 footer { border-top: 1px solid #cad8e0; padding: 24px 6vw; color: #496272; font-size: 14px; }
-@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } main { padding-top: 28px; } .event-filters { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } main { padding-top: 28px; } .event-filters { grid-template-columns: 1fr; } .filter-row input { flex-basis: 100%; } }
