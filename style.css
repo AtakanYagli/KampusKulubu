@@ -1,0 +1,22 @@
+/* Ortak görünüm: Üç HTML dosyası bu dosyayı kullanır. */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; color: #183044; background: #f3f7fa; line-height: 1.65; }
+header { background: #102c40; color: white; padding: 24px max(6vw, 20px); }
+.brand { font-weight: bold; font-size: 23px; }
+nav { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 12px; }
+nav a { color: #c5e6ee; text-decoration: none; padding: 4px 0; }
+nav a[aria-current="page"] { color: white; border-bottom: 3px solid #72e1c5; }
+a { color: #086767; }
+a:focus-visible { outline: 3px solid #e1a82b; outline-offset: 5px; }
+main { max-width: 1100px; margin: 0 auto; padding: 48px 24px; min-height: 65vh; }
+.eyebrow { color: #087d70; font-weight: bold; letter-spacing: 2px; font-size: 14px; }
+h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.12; max-width: 850px; margin: 20px 0; }
+.intro { font-size: 21px; max-width: 730px; color: #496272; }
+.button { display: inline-block; margin: 16px 0 32px; padding: 13px 24px; background: #087d70; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px; }
+article { background: white; border-top: 4px solid #087d70; padding: 25px; border-radius: 6px; }
+article h2 { margin: 10px 0; font-size: 23px; }
+.meta { font-size: 14px; color: #087d70; font-weight: bold; }
+.note { padding: 18px 22px; border-left: 4px solid #db9d27; background: #fff4d8; margin-top: 30px; }
+footer { border-top: 1px solid #cad8e0; padding: 24px 6vw; color: #496272; font-size: 14px; }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } main { padding-top: 28px; } }
